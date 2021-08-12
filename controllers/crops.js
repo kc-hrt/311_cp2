@@ -24,10 +24,21 @@ const getCropById = (req, res) => {
 
 const createCrop = (req, res) => {
   // INSERT INTO USERS FIRST AND LAST NAME 
-  let sql = "insert into crops (first_name, last_name) values (?, ?)";
- 
+  let sql = "insert into crops (plant_id, pot_id, location_id, planted_date, projected_date, available_date, planted_quantity, available_quantity) values (?, ?, ?, ?, ?, ?, ?, ?)";
+
+     
+  
   // WHAT GOES IN THE BRACKETS
-  sql = mysql.format(sql, [ req.body.first_name, req.body.last_name ]);
+  sql = mysql.format(sql, [ 
+    req.body.plant_id, 
+    req.body.pot_id,
+    req.body.location_id,
+    req.body.planted_date,
+    req.body.projected_date,
+    req.body.available_date,
+    req.body.planted_quantity,
+    req.body.available_quantity
+  ]);
   
   pool.query(sql, (err, results) => {
     if (err) return handleSQLError(res, err)

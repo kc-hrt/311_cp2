@@ -24,10 +24,10 @@ const getPotById = (req, res) => {
 
 const createPot = (req, res) => {
   // INSERT INTO USERS FIRST AND LAST NAME 
-  let sql = "insert into pots (first_name, last_name) values (?, ?)";
+  let sql = "insert into pots (pot_size, pot_type) values (?, ?)";
  
   // WHAT GOES IN THE BRACKETS
-  sql = mysql.format(sql, [ req.body.first_name, req.body.last_name ]);
+  sql = mysql.format(sql, [ req.body.pot_size, req.body.pot_type ]);
   
   pool.query(sql, (err, results) => {
     if (err) return handleSQLError(res, err)
@@ -38,9 +38,9 @@ const createPot = (req, res) => {
 
 const updatePotById = (req, res) => {
   // UPDATE USERS AND SET FIRST AND LAST NAME WHERE ID = <REQ PARAMS ID>
-  let sql = "update pots set first_name = ?, last_name = ? where id = ?"
+  let sql = "update pots set pot_size = ?, pot_type = ? where id = ?"
   // WHAT GOES IN THE BRACKETS
-  sql = mysql.format(sql, [ req.body.first_name, req.body.last_name, req.params.id ])
+  sql = mysql.format(sql, [ req.body.pot_size, req.body.pot_type, req.params.id ])
 
   pool.query(sql, (err, results) => {
     if (err) return handleSQLError(res, err)

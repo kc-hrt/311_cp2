@@ -7,7 +7,7 @@
 #
 # Host: fotohut.org (MySQL 5.6.41-84.1)
 # Database: fotohut_Avail
-# Generation Time: 2021-08-12 06:20:10 +0000
+# Generation Time: 2021-08-12 22:13:50 +0000
 # ************************************************************
 
 
@@ -44,6 +44,23 @@ CREATE TABLE `crops` (
   CONSTRAINT `crops_ibfk_3` FOREIGN KEY (`location_id`) REFERENCES `locations` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+LOCK TABLES `crops` WRITE;
+/*!40000 ALTER TABLE `crops` DISABLE KEYS */;
+
+INSERT INTO `crops` (`id`, `plant_id`, `pot_id`, `location_id`, `planted_date`, `projected_date`, `available_date`, `planted_quantity`, `available_quantity`)
+VALUES
+	(1,1,1,11,'2021-08-02','2021-09-12',NULL,327,NULL),
+	(2,2,1,11,'2021-08-02','2021-09-12',NULL,325,NULL),
+	(3,3,1,11,'2021-08-02','2021-09-12',NULL,328,NULL),
+	(4,4,1,11,'2021-08-02','2021-09-12',NULL,327,NULL),
+	(5,5,1,12,'2021-08-02','2021-09-12',NULL,325,NULL),
+	(6,6,1,12,'2021-08-02','2021-09-12',NULL,323,NULL),
+	(7,7,1,12,'2021-08-03','2021-09-12',NULL,420,NULL),
+	(8,8,1,13,'2021-08-03','2021-09-12',NULL,422,NULL),
+	(9,9,1,11,'2021-08-04','2021-09-12',NULL,512,NULL);
+
+/*!40000 ALTER TABLE `crops` ENABLE KEYS */;
+UNLOCK TABLES;
 
 
 # Dump of table locations
