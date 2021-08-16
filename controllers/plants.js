@@ -3,7 +3,7 @@ const pool = require('../sql/connection')
 const { handleSQLError } = require('../sql/error')
 
 const getAllPlants = (req, res) => {
-  // SELECT ALL USERS
+  // SELECT ALL plants 
   pool.query("SELECT * FROM plants", (err, rows) => {
     if (err) return handleSQLError(res, err)
     return res.json(rows);
@@ -11,9 +11,9 @@ const getAllPlants = (req, res) => {
 }
 
 const getPlantById = (req, res) => {
-  // SELECT USERS WHERE ID = <REQ PARAMS ID>
+  // SELECT plants  WHERE ID = <REQ PARAMS ID>
   let sql = "select * from plants where id = ?"
-  // WHAT GOES IN THE BRACKETS
+
   sql = mysql.format(sql, [req.params.id]);
 
   pool.query(sql, (err, rows) => {
@@ -23,10 +23,10 @@ const getPlantById = (req, res) => {
 }
 
 const createPlant = (req, res) => {
-  // INSERT INTO USERS FIRST AND LAST NAME 
+  // INSERT INTO plants  plant name variant and color  
   let sql = "insert into plants (plant_name, plant_variant, plant_color) values (?, ?, ?)";
  
-  // WHAT GOES IN THE BRACKETS
+
   sql = mysql.format(sql, [ req.body.plant_name, req.body.plant_variant, req.body.plant_color ]);
   
   pool.query(sql, (err, results) => {
@@ -37,9 +37,9 @@ const createPlant = (req, res) => {
 }
 
 const updatePlantById = (req, res) => {
-  // UPDATE USERS AND SET FIRST AND LAST NAME WHERE ID = <REQ PARAMS ID>
+  // UPDATE plants  AND SET plant name variant and color  WHERE ID = <REQ PARAMS ID>
   let sql = "update plants set plant_name = ?, plant_variant = ?, plant_color = ? where id = ?"
-  // WHAT GOES IN THE BRACKETS
+
   sql = mysql.format(sql, [ req.body.plant_name, req.body.plant_variant, req.body.plant_color, req.params.id ])
 
   pool.query(sql, (err, results) => {
@@ -51,7 +51,7 @@ const updatePlantById = (req, res) => {
 const deletePlantById = (req, res) => {
   
   let sql = "delete from plants where id = ?"
-  // WHAT GOES IN THE BRACKETS
+
   sql = mysql.format(sql, [req.body.id])
 
   pool.query(sql, (err, results) => {

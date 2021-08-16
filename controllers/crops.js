@@ -3,7 +3,7 @@ const pool = require('../sql/connection')
 const { handleSQLError } = require('../sql/error')
 
 const getAllCrops = (req, res) => {
-  // SELECT ALL USERS
+  // SELECT ALL crops
   pool.query("SELECT * FROM crops", (err, rows) => {
     if (err) return handleSQLError(res, err)
     return res.json(rows);
@@ -11,9 +11,8 @@ const getAllCrops = (req, res) => {
 }
 
 const getCropById = (req, res) => {
-  // SELECT USERS WHERE ID = <REQ PARAMS ID>
+  // SELECT crops WHERE ID = <REQ PARAMS ID>
   let sql = "select * from crops where id = ?"
-  // WHAT GOES IN THE BRACKETS
   sql = mysql.format(sql, [req.params.id]);
 
   pool.query(sql, (err, rows) => {
@@ -23,9 +22,9 @@ const getCropById = (req, res) => {
 }
 
 const createCrop = (req, res) => {
-  // INSERT INTO USERS FIRST AND LAST NAME 
+  // INSERT INTO crops
   let sql = "insert into crops (plant_id, pot_id, location_id, planted_date, projected_date, available_date, planted_quantity, available_quantity) values (?, ?, ?, ?, ?, ?, ?, ?)";
-  // WHAT GOES IN THE BRACKETS
+
   sql = mysql.format(sql, [ 
     req.body.plant_id, 
     req.body.pot_id,
@@ -45,7 +44,7 @@ const createCrop = (req, res) => {
 }
 
 const updateCropById = (req, res) => {
-  
+  // update crops
   let sql = "update crops set plant_id = ?, pot_id = ?, location_id = ?, planted_date = ?, projected_date = ?, available_date = ?, planted_quantity = ?, available_quantity = ? where id = ?"
   
   sql = mysql.format(sql, [ 
@@ -67,6 +66,7 @@ const updateCropById = (req, res) => {
 }
 
 const deleteCropById = (req, res) => {
+  // delete crops
   let sql = "delete from crops where id = ?"
   sql = mysql.format(sql, [req.body.id])
 

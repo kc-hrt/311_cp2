@@ -13,6 +13,7 @@ app.use(require('./routers/locations'));
 app.use(require('./routers/plants'));
 app.use(require('./routers/pots'));
 app.use(require('./routers/users'));
+app.use(require('./routers/availability'));
 // 
 app.get('/', (req, res) => {
   res.send('Welcome to our server!')

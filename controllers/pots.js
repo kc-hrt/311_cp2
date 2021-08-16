@@ -3,7 +3,7 @@ const pool = require('../sql/connection')
 const { handleSQLError } = require('../sql/error')
 
 const getAllPots = (req, res) => {
-  // SELECT ALL USERS
+  // SELECT ALL pot
   pool.query("SELECT * FROM pots", (err, rows) => {
     if (err) return handleSQLError(res, err)
     return res.json(rows);
@@ -11,9 +11,9 @@ const getAllPots = (req, res) => {
 }
 
 const getPotById = (req, res) => {
-  // SELECT USERS WHERE ID = <REQ PARAMS ID>
+  // SELECT pot WHERE ID = <REQ PARAMS ID>
   let sql = "select * from pots where id = ?"
-  // WHAT GOES IN THE BRACKETS
+
   sql = mysql.format(sql, [req.params.id]);
 
   pool.query(sql, (err, rows) => {
@@ -23,10 +23,10 @@ const getPotById = (req, res) => {
 }
 
 const createPot = (req, res) => {
-  // INSERT INTO USERS FIRST AND LAST NAME 
+  // INSERT INTO pot pot size and type 
   let sql = "insert into pots (pot_size, pot_type) values (?, ?)";
  
-  // WHAT GOES IN THE BRACKETS
+
   sql = mysql.format(sql, [ req.body.pot_size, req.body.pot_type ]);
   
   pool.query(sql, (err, results) => {
@@ -37,9 +37,9 @@ const createPot = (req, res) => {
 }
 
 const updatePotById = (req, res) => {
-  // UPDATE USERS AND SET FIRST AND LAST NAME WHERE ID = <REQ PARAMS ID>
+  // UPDATE pot AND SET pot_size and pot_type WHERE ID = <REQ PARAMS ID>
   let sql = "update pots set pot_size = ?, pot_type = ? where id = ?"
-  // WHAT GOES IN THE BRACKETS
+
   sql = mysql.format(sql, [ req.body.pot_size, req.body.pot_type, req.params.id ])
 
   pool.query(sql, (err, results) => {
@@ -49,9 +49,9 @@ const updatePotById = (req, res) => {
 }
 
 const deletePotById = (req, res) => {
-  // DELETE FROM USERS WHERE FIRST NAME = <REQ PARAMS FIRST_NAME>
+  // DELETE FROM pot WHERE id = <REQ PARAMS id>
   let sql = "delete from pots where id = ?"
-  // WHAT GOES IN THE BRACKETS
+
   sql = mysql.format(sql, [req.body.id])
 
   pool.query(sql, (err, results) => {
