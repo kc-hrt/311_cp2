@@ -24,10 +24,10 @@ const getLocationById = (req, res) => {
 
 const createLocation = (req, res) => {
   // INSERT INTO USERS FIRST AND LAST NAME 
-  let sql = "insert into locations (first_name, last_name) values (?, ?)";
+  let sql = "insert into locations (location_id, location_description) values (?, ?)";
  
   // WHAT GOES IN THE BRACKETS
-  sql = mysql.format(sql, [ req.body.first_name, req.body.last_name ]);
+  sql = mysql.format(sql, [ req.body.location_id, req.body.location_description ]);
   
   pool.query(sql, (err, results) => {
     if (err) return handleSQLError(res, err)
@@ -38,9 +38,9 @@ const createLocation = (req, res) => {
 
 const updateLocationById = (req, res) => {
   // UPDATE USERS AND SET FIRST AND LAST NAME WHERE ID = <REQ PARAMS ID>
-  let sql = "update locations set first_name = ?, last_name = ? where id = ?"
+  let sql = "update locations set location_id = ?, location_description = ? where id = ?"
   // WHAT GOES IN THE BRACKETS
-  sql = mysql.format(sql, [ req.body.first_name, req.body.last_name, req.params.id ])
+  sql = mysql.format(sql, [ req.body.location_id, req.body.location_description, req.params.id ])
 
   pool.query(sql, (err, results) => {
     if (err) return handleSQLError(res, err)

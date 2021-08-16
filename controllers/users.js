@@ -38,9 +38,13 @@ const createUser = (req, res) => {
 
 const updateUserById = (req, res) => {
   // UPDATE USERS AND SET FIRST AND LAST NAME WHERE ID = <REQ PARAMS ID>
-  let sql = "update users set first_name = ?, last_name = ? where id = ?"
+  let sql = "update users set usersname = ?, first_name = ?, last_name = ? where id = ?"
   // WHAT GOES IN THE BRACKETS
-  sql = mysql.format(sql, [ req.body.first_name, req.body.last_name, req.params.id ])
+  sql = mysql.format(sql, [ 
+    req.body.username, 
+    req.body.first_name, 
+    req.body.last_name, 
+    req.params.id ])
 
   pool.query(sql, (err, results) => {
     if (err) return handleSQLError(res, err)
